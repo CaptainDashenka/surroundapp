@@ -1,77 +1,433 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title></title>
         <meta charset="utf-8" />
         <script src="cordova.js"></script>
-        <script src="kendo/js/jquery.min.js"></script>
-        <script src="kendo/js/kendo.mobile.min.js"></script>
+       <!--  <script src="kendo/js/jquery.min.js"></script>
+       <script src="kendo/js/kendo.mobile.min.js"></script>
         <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <script src="scripts/hello-world.js"></script>
+        <script src="scripts/hello-world.js"></script>-->
+       
 
-        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-        <link href="styles/main.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div data-role="view" id="tabstrip-home" data-title="Hello World!">
-            <h1>Welcome!</h1>
-            <p>
-                Icenium&trade; enables you to build cross-platform device applications regardless of your 
-                development platform by combining the convenience of a local development toolset with the 
-                power and flexibility of the cloud.
-            </p>
+    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <!-- <link href="styles/kendomobileallmin.css" rel="stylesheet"/> -->
+      <link href="styles/main.css" rel="stylesheet" />
+    
+     <!-- Surroundapp own stylesheet -->
+
+       
+        
+       <!-- <link  href="styles/font-awesome.min.css" rel="stylesheet">-->
+        
+   <link href="http://cdn.kendostatic.com/2012.3.1024/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="http://cdn.kendostatic.com/2012.3.1024/styles/kendo.default.min.css"rel="stylesheet">
+    <link href="http://cdn.kendostatic.com/2012.3.1024/styles/kendo.mobile.all.min.css" rel="stylesheet">
+        
+        
+       <!--    
+        <link href="styles/kendocommonmin.css" rel="stylesheet"/>
+       <link href="styles/kendodefaultmin.css" rel="stylesheet"/>
+        <link href="styles/kendomobileallminonline.css" rel="stylesheet"/>-->
+    
+       
+        <link href="styles/surroundapp.css" rel="stylesheet"> 
+
+     <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://cdn.kendostatic.com/2012.3.1024/js/kendo.all.min.js"></script>
+
+    
+</head>
+<body>
+    
+<div data-role="view"  id="tabstrip-hello" data-title="Hello" data-layout="mobile-tabstrip">
+   Hello
+ <!--  <button onclick="display_translation()" value="Translate">Translate</button>
+   <button data-bind="events:{click: display_translation()}">Button</button>
+   
+   <span data-bind="click: showDescription">Show description</span>
+<span data-bind="visible: isDescriptionShown, text: description"></span> -->
+ <div id="windowcontainer"></div>
+
+<!--<span id="openwindow" class="k-button">Click here to open the window</span>-->
+  
+   
+    
+</div>    
+     
+
+<div data-role="view" id="tabstrip-home" data-title="Home" data-layout="mobile-tabstrip">
+   <ul id="statusListView"></ul>
+</div>
+
+ 
+
+
+<div data-role="view" id="tabstrip-others" data-title="Others" data-layout="mobile-tabstrip">
+    Others
+
+
+
+
+<!--<span id="openwindow" class="k-button">Click here to open the window</span>-->
+   
+</div>
+    
+    
+    <div data-role="view"  id="tabstrip-filter" data-title="Message" data-layout="mobile-tabstrip">
+
+       Filter tab
+
+    <div id="windowcontainer"></div>
+
+</div>   
+
+     
+
+<div data-role="view" id="tabstrip-message" data-title="Profile" data-layout="mobile-tabstrip">
+
+    <div class="">
+
+       Message tab 
+
+    </div>
+
+</div>
+
+   
+
+<div data-role="view" id="tabstrip-find" data-title="Discover" data-layout="mobile-tabstrip">
+
+    <div class="">
+
+       Find Tab 
+
+    </div>
+
+</div>
+
+   
+
+<div data-role="view" id="tabstrip-settings" data-title="More" data-layout="mobile-tabstrip">
+
+    <div class="">
+
+       Settings tab 
+
+    </div>
+
+</div>
+    
+ <div data-role="view" id="detailtweet" data-title="tweet" data-layout="mobile-tabstrip">
+    
+       
+     <div id="translationbox">
+         <img id="profilephoto"/>
+         
+     </div>
+     
+     <div>
+         
+     
+         <button class="button" id="translateButton" style="width:25%;height:30px;" onClick="testClick()" data-role="button" title="Translate">Translate</button>
+</div>
+  <!--<input type="submit" class="button" id="replyButton" style="width:25%;height:30px;" data-role="button" value="Reply" onclick="window.location = 'reply.html';"/>-->
+      <div id="translatedbox">
+         
+     </div>  
+    
+ </div>
+                
+  <!-- <button class="k-button" data-bind="click: translateProduct">Translate2</button>
+  // <input type="button" id="translateButton" style="width:10%" onclick="display_translation()" value="Translate" />   
+ <button class="k-button" data-bind="events: { click: listener, dblclick: listener, mouseover: listener, mouseout: listener }">Button</button>*/
+-->
+<!--<div id="example" class="k-content">
+<div class="demo-section"> -->
+    
+<script id="status-template" type="text/x-kendo-template">
+<div class="tweet">
+    <img src="#= user.profile_image_url #" alt="#= user.screen_name #" width="48" height="48" />
+   <span>#= user.screen_name #: </span>
+   <p>#= text # </p>
+
+  
+ <div id= "window1"></div>
+   
+</div>
+    
+    
+</script>  
+    
+ <div id="Searchwindow" name="Searchwindow"style="width:100%" >
+     <!--Updated gossip information @ sunny me in # a # --> 
+     <output id="translatedText" style="width:100%"></output>
+     
+</div> 
+
+
+   
+<!-- </div>
+</div>-->
+   
+<div data-role="layout" data-id="mobile-tabstrip">
+
+    <header data-role="header" >
+
+        <div data-role="navbar" style="height:40px">
+
+            <!--a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+
+            <span data-role="view-title">
+
+                <img src="styles/img/surroundapp-orange2.jpg" style="max-width:100%;" title="SurroundApp" alt="SurroundApp">
+
+            </span>-->
+
+           <img src="styles/img/logo.png" alt="surroundapp" style="padding-top:3px">
+            <a data-align="right" href="#"><img src="styles/img/write.png" alt="write" style="padding-top:7px"></a>
+
         </div>
 
-        <div data-role="view" id="tabstrip-uiinteraction" data-title="UI Interaction">
-            <h1>Say Hello!</h1>
-            <div id='helloWorldInput'>
-                <label for="txtName" style="display: inline-block;">Enter your name:</label>
-                <input type="text" id="txtName" value="" />
-            </div>
-            <div id='helloWorldText' style="display:block;"></div>
-            <div class="buttonArea">
-                <a id="resetButton" data-role="button" data-click="sayHelloReset" data-icon="refresh">Reset</a>
-                <a id="submitButton" data-role="button" data-click="sayHello" data-icon="compose">Submit</a>
-            </div>
-        </div>
+    </header>
 
-        <div data-role="view" id="tabstrip-geolocation" data-title="Geolocation">
-            <h1>My Location</h1>
-            <div id="geoLocationContainer">
-                <div id="myLocation">Unable to get location information. Please check your network connection and try again.</div>
-                <a id="refreshMap" data-role="button" data-click="getLocation" data-icon="refresh">Refresh Location</a>
-                <div id="map_canvas"></div>
-            </div>
-        </div>
+   
 
-        <div data-role="layout" data-id="mobile-tabstrip">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title"></span>
-                </div>
-            </header>
+   <div data-role="footer">
 
-            <div data-role="footer">
-                <div data-role="tabstrip">
-                    <a href="#tabstrip-home" data-icon="home">Home</a>
-                    <a href="#tabstrip-uiinteraction" data-icon="share">UI Interaction</a>
-                    <a href="#tabstrip-geolocation" data-icon="globe">Geolocation</a>
-                </div>
-            </div>
-        </div>
+       <div data-role="tabstrip">
 
-         <div data-role="layout" data-id="mobile-tabstrip" data-platform="android">
-            <div data-role="footer">
-                <div data-role="tabstrip">
-                    <a href="#tabstrip-home" data-icon="home">Home</a>
-                    <a href="#tabstrip-uiinteraction" data-icon="share">UI Interaction</a>
-                    <a href="#tabstrip-geolocation" data-icon="globe">Geolocation</a>
-                </div>
-            </div>
-        </div> 
+           <a href="#tabstrip-home" data-icon="home">Home</a>
 
-        <script>
-            var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "mobile-tabstrip" });
-        </script>
-    </body>
+           <a href="#tabstrip-filter" data-icon="custom">Filter</a>
+
+           <a href="#tabstrip-message" data-icon="contacts">Messages</a>
+
+           <a href="#tabstrip-find" data-icon="search">Find</a>
+
+           <a href="#tabstrip-settings" data-icon="settings">Settings</a>
+
+       </div>
+
+   </div>
+
+</div>  
+    
+    
+<script>
+
+var app = new kendo.mobile.Application(document.body);
+
+   var dataSource = new kendo.data.DataSource({
+       transport: {
+           read: {
+               url:"https://api.weibo.com/2/statuses/friends_timeline.json",
+               dataType: "jsonp",
+               data: {
+                   access_token: "2.002M91_DwMN8HCef97eb8c5c2KdMQC"
+               }
+           }
+       },
+       schema: {
+           data: function(response) {
+               return response.data.statuses;
+           }
+       }
+   });
+   
+  
+
+   
+   $("#statusListView").kendoMobileListView({
+       dataSource: dataSource,
+       template: $("#status-template").text(),
+       click: function(e) {
+                    
+           var text=e.dataItem.text;
+           text = text.replace(/#/g, '\!'); 
+            $('#translationbox').empty();
+           $('#translatedbox').empty();
+           var imgurl=e.dataItem.user.profile_image_url+".jpg";
+           console.log(imgurl);
+           $('#profilephoto').attr({src: "http://tp3.sinaimg.cn/1197161814/50/1290146312/1.jpg"});
+           // $('#translationbox').prepend('<img src= "imgurl" />');
+           $('#translationbox').append(e.dataItem.user.screen_name);
+           $('#translationbox').append(text);
+           window.location = '#detailtweet';
+           
+           /*      var translaionURI = "http://mymemory.translated.net/api/get?q=";
+           var langQS = "&langpair=";
+           var from = "ZH-CN";
+           var to = "EN";
+           var qsVal = langQS + from + '|' + to;
+           var fullURI = translaionURI + text + qsVal;
+          
+            $.ajax({
+            url: fullURI, 
+            dataType: 'json', 
+            success: function (data) {
+                 $('#translatedbox').html(data.responseData.translatedText);
+                
+            }
+            }); */
+     
+          }
+    });
+    
+    function testClick(message){
+        var getMessage = document.getElementById('translationbox').innerHTML;
+        
+        //var translaionURI = "http://mymemory.translated.net/api/get?q=";
+          // var langQS = "&langpair=";
+           //var from = "ZH-CN";
+           //var to = "EN";
+           //var qsVal = langQS + from + '|' + to;
+          // var fullURI = translaionURI + getMessage + qsVal;
+        
+        //youdao
+        //
+        // var translaionURI = "http://fanyi.youdao.com/openapi.do?keyfrom=SurroundApp&key=231910429&type=data&doctype=jsonp&callback=show&version=1.1&q=";
+         var translationURI = "http://fanyi.youdao.com/openapi.do?keyfrom=SurroundApp&key=231910429&type=data&doctype=jsonp&&callback=some&version=1.1&q=";
+        
+          var fullURI = translationURI + getMessage;
+        
+        
+        
+        //  alert('kcl');
+        //alert(fullURI);
+        var translatedboxtext;
+        
+            $.ajax({
+                type: 'GET',   
+            url: fullURI, 
+            dataType: 'jsonp', 
+                jsonpCallback: 'some',
+            success: function (data) {
+                // $('#translatedbox').html(data.responseData.translatedText);    
+                // alert('intran');
+                // alert(data.responseData.translatedText);
+                 console.log(data.translation);
+                 translatedboxtext=data.translation;
+                
+                //alert(translatedboxtext);
+                 $('#translatedbox').html(getMessage.toString());
+                $('#translatedbox').html('test');
+                $('#translatedbox').append(translatedboxtext.toString());
+                //alert($('#translatedbox').html(data.responseData.translatedText));
+            }
+                  
+            });
+     
+        //       alert(message);
+        //alert(getMessage);
+    }
+    
+    /*  $('#translateButton').click({
+        
+        //var text2=document.getElementById('#translatebox');
+        //alert(text2);
+        
+       dataSource: dataSource,
+       template: $("#status-template").text(),
+       click: function(e) {
+                    
+           var text=e.dataItem.text;
+           text = text.replace(/#/g, '\!'); 
+           
+           var translaionURI = "http://mymemory.translated.net/api/get?q=";
+           var langQS = "&langpair=";
+           var from = "ZH-CN";
+           var to = "EN";
+           var qsVal = langQS + from + '|' + to;
+           var fullURI = translaionURI + text + qsVal;
+          
+            $.ajax({
+            url: fullURI, 
+            dataType: 'json', 
+            success: function (data) {
+                 $('#translatedbox').html(data.responseData.translatedText);
+                
+            }
+            });
+     
+          }
+    }); */
+    
+ 
+   function display_translation()
+   {
+      
+       
+       alert("ceo");
+  
+   }
+  
+
+  
+
+
+
+
+
+   /*var translaionURI = "http://mymemory.translated.net/api/get?q=";
+   var langQS = "&langpair=";
+
+   function translate(text) {
+       var from = "zh-CN";
+       var to = "en-GB"
+       //var text = $('#translateText').val();
+       var qsVal = langQS + from + '|' + to;
+       var fullURI = translaionURI + text + qsVal;
+
+       $.ajax({
+           url: fullURI, dataType: 'json', success: function (data) {
+               $('#translatedText').val(data.responseData.translatedText);
+           }
+       });
+       return data.responseData.translatedText;
+   }
+
+   
+   
+var viewModel = kendo.observable({
+description: "Description",
+isDescriptionShown: false,
+showDescription: function(e) {
+   // show the span by setting isDescriptionShown to true
+   this.set("isDescriptionShown", true);
+}
+});
+
+
+   kendo.bind($("#example"), viewModel);*/
+  
+</script>
+
+
+
+<!--function createWindow(id) {
+  $(document.body).append('<div id="myDynamicWindow"></div>');
+  $('#myDynamicWindow').kendoWindow({
+     title: "Order Details",
+     modal: true,
+     resizable: false,
+     width: 400,
+     content: "dadfa",
+     close: function() {
+        setTimeout(function() {
+            $('#myDynamicWindow').kendoWindow('destroy');
+        }, 200);
+     }
+  }).data('kendoWindow').center();
+};
+ 
+function showOrder(e) {
+    e.preventDefault();
+    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+    createWindow(dataItem.Id);
+}-->
+
+</body>
+
+  
 </html>

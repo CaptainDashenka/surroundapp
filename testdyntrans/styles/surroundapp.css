@@ -1,0 +1,60 @@
+body {
+
+    color: blue;
+
+    background: #F15D22;
+
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+
+    font-size: 10px;
+
+    margin: 0px;
+
+    padding: 0px;          
+
+}
+
+ 
+
+span.screenName {
+
+    font-size: 15px;
+
+    color: #F15D22 !important;
+
+}
+
+ 
+
+.translationBox {
+
+    background-color: #383838;
+
+    color: #EFEEE9;
+
+}
+
+ 
+
+.button {
+
+    background-color: #F15D22 !important;
+
+    color: #EFEEE9 !important;
+
+}
+
+    
+    /* Remove font icons styling, use .km- + data-icon name if only one should be overridden */
+    .km-root .km-pane .km-view .km-icon {
+        background-size: 100% 100%;
+        -webkit-background-clip: border-box;
+        background-color: currentcolor;
+    }
+
+    .km-icon .km-custom {
+        background-image: url("img/write.png");
+        background-color: red;
+        background-size: 100%;
+    }
+    
