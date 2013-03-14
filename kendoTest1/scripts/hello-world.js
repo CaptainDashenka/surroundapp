@@ -29,11 +29,9 @@ function callWBlogin() {
     var resultMessageElem = document.getElementById('result');
 
  /*    
-     
     closeWBlogin('http://www.surroundapp.asia/postlogin.html#access_token=2.002M91_DwMN8HCef97eb8c5c2KdMQC&remind_in=6345654254&expires_in=250327040&refresh_token=REFRESH_TOKEN');
     return;
-
-  */  
+ */   
     objWP = window.plugins;
     var navUri = 'https://api.weibo.com/oauth2/authorize?client_id=1942185646&response_type=token&redirect_uri=http://www.surroundapp.asia/postlogin.html&display=mobile';
     if(objWP != null) {
