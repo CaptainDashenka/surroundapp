@@ -1,26 +1,93 @@
-body
+.body
 {
-    font: Arial, sans-serif;
-}
-
-.buttonArea,
-.footerText,
-#geoLocationContainer,
-#helloWorldInput,
-#helloWorldText
-{
+    font-family: Arial, sans-serif;
+    /*background:url(images/logo250.png) no-repeat center top;*/
+    background-color:#080808;
+    color:white;
     text-align: center;
 }
 
-#txtName
-{
-    border: 1px solid #AAA;
-    border-radius: 15px;
-    position:static;
-    margin-left: 1em;
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
-    background:white;
+#wbLoginButton {
+    background-color:white;
+    color:black;
+    font-size:16px;
+    width:11em;
+    padding:0px;
+    
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+    border-radius: 4px;
+}
+
+.bottom-link {
+    font-size:0.7em;
+    margin-top:30px;
+   
+}
+
+.km-android, .km-android .km-content {
+    background:#222;
+    background-image:none;
+}
+
+.km-ios, .km-ios .km-content, 
+.km-tablet .km-ios .km-content {
+    background-color:#222;
+    background-image:none;
+    color:white;
+}
+
+.km-ios .km-list > li {
+    background:none;
+}
+
+.km-android div.km-view {
+    -webkit-box-direction: normal;
+}
+
+.km-android .km-tabstrip .km-state-active .km-icon {
+     color:#f15d22;   
+}
+
+.km-ios6 .km-tabstrip .km-state-active .km-icon {
+     color:#f15d22; 
+}
+
+
+/*=========================== timeline statusfeed ==============================*/
+
+#statusListView LI {
+    width:48%;
+    float:left;
+    height:10em;
+    overflow:hidden;
+    padding:0px;
+    margin:0.2em;
+}
+
+.timeline-image {
+    text-align:center;
+    margin-bottom:0.5em;
+}
+
+.timeline-item {
+    height:10em;
+    background-color:rgba(255, 255, 255,0.7);
     color: black;
-    padding: 7px;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+.timeline-item P {
+    margin:0px;
+}
+
+.timeline-text {
+    text-align:left;
 }

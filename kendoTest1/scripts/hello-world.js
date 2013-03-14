@@ -5,57 +5,153 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 // PhoneGap is ready
 function onDeviceReady() {
-    getLocation();
-    navigator.splashscreen.hide();
+   navigator.splashscreen.hide();
+
+    // check for storage funcionality and already existing access tokens
+    if (checkStorage) {
+    var sToken = window.localStorage.getItem("WBtoken");
+    if (sToken != null) {
+        // check token
+        var sAPICall = 'https://api.weibo.com/oauth2/get_token_info?access_token=' + sToken;
+        $.ajax({
+            type: 'POST',   
+            url: sAPICall,
+            success: function (data) {
+                app.navigate('home.html');
+             }
+        });
+    }}
 }
 
-function getLocation() {
-    navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+
+//=================== Logon to Weibo ( page 2 ) Operations =====================//
+function callWBlogin() {
+    var resultMessageElem = document.getElementById('result');
+
+ /*    
+     
+    closeWBlogin('http://www.surroundapp.asia/postlogin.html#access_token=2.002M91_DwMN8HCef97eb8c5c2KdMQC&remind_in=6345654254&expires_in=250327040&refresh_token=REFRESH_TOKEN');
+    return;
+
+  */  
+    objWP = window.plugins;
+    var navUri = 'https://api.weibo.com/oauth2/authorize?client_id=1942185646&response_type=token&redirect_uri=http://www.surroundapp.asia/postlogin.html&display=mobile';
+    if(objWP != null) {
+        objWP.childBrowser.showWebPage(navUri,{ showLocationBar: false });
+        objWP.childBrowser.onLocationChange = closeWBlogin;
+    }
+    else
+       resultMessageElem.innerHTML = 'plugins is null';
+    //resultMessageElem.innerHTML += ' hello2';
 }
 
-//=======================Say Hello (Page 1) Operations=======================//
-function sayHello() {
-    var sayHelloInputElem = document.getElementById('helloWorldInput');
-    var sayHelloTextElem = document.getElementById('helloWorldText');
-    var inputText = document.getElementById('txtName');
-
-    sayHelloTextElem.innerHTML = 'Hello, ' + inputText.value + '!';
-    sayHelloTextElem.style.display = 'block';
-    sayHelloInputElem.style.display = 'none';
-}
-
-function sayHelloReset() {
-    var sayHelloInputElem = document.getElementById('helloWorldInput');
-    var sayHelloTextElem = document.getElementById('helloWorldText');
-    var inputText = document.getElementById('txtName');
-
-    inputText.value = '';
-    sayHelloTextElem.style.display = 'none';
-    sayHelloInputElem.style.display = 'block';
-}
-
-//=======================Geolocation Operations=======================//
-// onGeolocationSuccess Geolocation
-function onGeolocationSuccess(position) {
-    // Use Google API to get the location data for the current coordinates
-    var geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    geocoder.geocode({ "latLng": latlng }, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            if ((results.length > 1) && results[1]) {
-                $("#myLocation").html(results[1].formatted_address);
-            }
+function closeWBlogin(redirUrl) {
+       
+    if (redirUrl.indexOf("redirect_uri") == -1 && redirUrl.indexOf("surroundapp.asia") >= 0) {
+        var resultMessageElem = document.getElementById('result');
+        window.plugins.childBrowser.close();
+        
+        // finding the parameters
+        var arrMatches = redirUrl.match(/access_token=([0-9a-zA-Z.=_]*)?/);
+        //resultMessageElem.innerHTML = "**";
+       
+        if (arrMatches != null) {
+             resultMessageElem.innerHTML = "url: " + redirUrl + " access token: " + arrMatches[1] ;
+             console.log(arrMatches[1]);
+             window.localStorage.setItem("WBtoken",arrMatches[1]);
+             app.navigate('home.html');
         }
+        else
+        resultMessageElem.innerHTML = "access token not found";
+    }
+}
+
+function showAccessToken(e) {
+    
+    var tokenMessageElem = document.getElementById('tokenDisplay');
+    var sToken = window.localStorage.getItem("WBtoken");
+    tokenMessageElem.innerHTML += sToken; 
+}
+
+//=================== Time line data feed =========================//
+    
+   var dataSource = new kendo.data.DataSource({
+       transport: {
+           read: {
+               url:"https://api.weibo.com/2/statuses/friends_timeline.json",
+               dataType: "jsonp",
+               data: {
+                   access_token: window.localStorage.getItem("WBtoken"),
+                   page:1,
+                   count:20 
+                }
+           }    
+       },
+       schema: {
+           data: function(response) {
+               return response.data.statuses;
+           }
+       }
+   });
+   
+  
+function viewInit(e){
+    
+      $("#statusListView").kendoMobileListView({
+      dataSource: dataSource,
+      pullToRefresh: true,
+      template: $("#status-template").html()
+      });
+    }
+  
+   
+   $("#statusListView").kendoMobileListView({
+       dataSource: dataSource,
+       //pullToRefresh: true,
+       //appendOnRefresh: true,
+       template: $("#status-template").text(),
+       click: function(e) {
+                    
+           var text=e.dataItem.text;
+           text = text.replace(/#/g, '\!'); 
+           
+           $('#translationbox').empty();
+           $('#translatedbox').empty();
+           $('#usertime').empty();
+           $('#userimg').empty();
+           var profileImageUrl = e.dataItem.user.profile_image_url; 
+           var createtime=e.dataItem.user.created_at;
+           var userimg=e.dataItem.original_pic;
+           console.log(createtime);
+           
+           $('#tweetProfileImage').html('<img width="48" height="48" src="'+ profileImageUrl +'.jpg" alt="profile image" />');
+           $('#username').html(e.dataItem.user.screen_name);
+           
+           var createtime2=kendo.toString(new Date(Date.parse(createtime)), "ddd dd MMM yyyy HH:mm ")
+           $('#usertime').html(createtime2);
+             
+           $('#translationbox').append(e.dataItem.user.screen_name);
+           $('#translationbox').append(':');
+           $('#translationbox').append(text);
+           if (userimg!== undefined)
+           { $('#userimg').html('<img width="100" height="100" src="'+ userimg +'.jpg" alt="profile image" />');}
+           
+           window.location = '#detailtweet';
+                          
+          }
     });
 
-    // Use Google API to get a map of the current location
-    // http://maps.googleapis.com/maps/api/staticmap?size=280x300&maptype=hybrid&zoom=16&markers=size:mid%7Ccolor:red%7C42.375022,-71.273729&sensor=true
-    var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x300&maptype=hybrid&zoom=16&sensor=true&markers=size:mid%7Ccolor:red%7C' + latlng;
-    var mapImg = '<img src="' + googleApis_map_Url + '" />';
-    $("#map_canvas").html(mapImg);
-}
+//============================ Utilities =========================//
 
-// onGeolocationError Callback receives a PositionError object
-function onGeolocationError(error) {
-    $("#myLocation").html("<span class='err'>" + error.message + "</span>");
-}
+// check for storage
+var checkStorage = (function() {
+      var uid = new Date,
+          storage,
+          result;
+      try {
+        (storage = window.localStorage).setItem(uid, uid);
+        result = storage.getItem(uid) == uid;
+        storage.removeItem(uid);
+        return result && storage;
+      } catch(e) {}
+    }());

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+        <div data-role="view" id="timelineview" data-layout="mobile-tabstrip" data-show="viewInit">
+           <ul id="statusListView"></ul>
+        </div>
+           
+        <div data-role="view" id="welcomescreen" data-init="showAccessToken">
+            you are logged in to weibo. your access token is:
+            <div id="tokenDisplay"></div>
+        </div>
+        
+        <script id="status-template" type="text/x-kendo-template">
+            #var original_pic#  
+                    #if(original_pic !== undefined)
+                    {#
+                        <img width="160" height="160" src="#= original_pic #" alt="#= user.screen_name #_tweetImage" 
+                            style="position: absolute;z-index:-1;" />
+                    #}#
+            <div>
+                <div id=tweetimg class="timeline-image">
+                    <img src="#= user.profile_image_url #" alt="#= user.screen_name #" width="48" height="48" />
+                </div>
+                <div id=userinfo class="timeline-item">
+                    <p>${user.screen_name}</p>
+                    <p> #= kendo.toString(new Date(Date.parse(created_at)), "ddd dd MMM yyyy HH:mm ") #<p>
+                    <div class="timeline-text">
+                        ${text}
+                    </div>
+                </div>
+            </div>
+        </script>
+</html>
