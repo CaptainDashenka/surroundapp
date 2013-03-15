@@ -18,17 +18,17 @@
                         <img width="160" height="160" src="#= original_pic #" alt="#= user.screen_name #_tweetImage" 
                             style="position: absolute;z-index:-1;" />
                     #}#
-            <div>
-                <div id=tweetimg class="timeline-image">
-                    <img src="#= user.profile_image_url #" alt="#= user.screen_name #" width="48" height="48" />
-                </div>
-                <div id=userinfo class="timeline-item">
-                    <p>${user.screen_name}</p>
-                    <p> #= kendo.toString(new Date(Date.parse(created_at)), "ddd dd MMM yyyy HH:mm ") #<p>
-                    <div class="timeline-text">
-                        ${text}
-                    </div>
+
+            <div id=tweetimg class="timeline-image">
+                <img src="#= user.profile_image_url #" alt="#= user.screen_name #" width="48" height="48" />
+            </div>
+            <div id=userinfo class="timeline-item">
+                <p>${user.screen_name}</p>
+                <p> #= kendo.toString(new Date(Date.parse(created_at)), "ddd dd MMM yyyy HH:mm ") #<p>
+                <div class="timeline-text">
+                    ${text}
                 </div>
             </div>
+
         </script>
 </html>
