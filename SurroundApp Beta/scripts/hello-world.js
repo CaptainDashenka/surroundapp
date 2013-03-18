@@ -31,7 +31,7 @@ function callWBlogin() {
  /*     
     closeWBlogin('http://www.surroundapp.asia/postlogin.html#access_token=2.002M91_DwMN8HCef97eb8c5c2KdMQC&remind_in=6345654254&expires_in=250327040&refresh_token=REFRESH_TOKEN');
     return;
-  */ 
+   */
     objWP = window.plugins;
     var navUri = 'https://api.weibo.com/oauth2/authorize?client_id=1942185646&response_type=token&redirect_uri=http://www.surroundapp.asia/postlogin.html&display=mobile';
     if(objWP != null) {
@@ -73,41 +73,47 @@ function showAccessToken(e) {
 
 //=================== Time line data feed =========================//
     
-   var dataSource = new kendo.data.DataSource({
-       transport: {
-           read: {
-               url:"https://api.weibo.com/2/statuses/friends_timeline.json",
-               dataType: "jsonp", //jsonp, odata
-               data: {
-                   access_token: window.localStorage.getItem("WBtoken"),
-                   page:1,
-                   count:20 
-                }
-           },
-           error: function(e) {
-                console.log(e.status);
-           }
-       },
-       schema: {
-           data: function(response) {
-               return response.data.statuses;
-           },
-           errors: function(response) {
-               // console.log(e.status);
-               return response.errors;
-           }
-       }
-   });
+  //var dataSource = 
    
   
 function viewInit(e){
     console.log('viewinit called');
     console.log( window.localStorage.getItem("WBtoken"));
-      $("#statusListView").kendoMobileListView({
-      dataSource: dataSource,
-      pullToRefresh: true,
-      template: $("#status-template").html()
-      });
+    $("#statusListView").kendoMobileListView({
+    dataSource: new kendo.data.DataSource({
+                  transport: {
+                      read: {
+                       url:"https://api.weibo.com/2/statuses/friends_timeline.json",
+                       dataType: "jsonp", //jsonp, odata
+                       data: {
+                           access_token: window.localStorage.getItem("WBtoken"),
+                           page:1,
+                           count:20 
+                        }
+                       },
+                      beforeSend: function() {
+                        app.showLoading();         
+                        },
+                      complete: function() {
+                        app.hideLoading();
+                        },
+                       error: function(e) {
+                         console.log(e.status);
+                        }
+                      },
+                   schema: {
+                   data: function(response) {
+                       return response.data.statuses;
+                   },
+                   errors: function(response) {
+                       // console.log(e.status);
+                       return response.errors;
+                   }
+               }
+    }),
+    pullToRefresh: true,
+    template: $("#status-template").html()
+    });
     console.log('viewinit ended');
     }
   

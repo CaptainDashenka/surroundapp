@@ -12,7 +12,7 @@
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <BundleVersion>0.1</BundleVersion>
-    <iOSDisplayName />
+    <iOSDisplayName>SurroundApp</iOSDisplayName>
     <AndroidVersionCode>1</AndroidVersionCode>
   </PropertyGroup>
   <ItemGroup>
