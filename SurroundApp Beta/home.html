@@ -6,16 +6,21 @@
            <ul id="statusListView"></ul>
         </div>
            
+        <div data-role="view" id="itemview" data-layout="mobile-tabstrip" data-show="displayDetail">
+            
+        </div>
+    
         <div data-role="view" id="welcomescreen" data-init="showAccessToken">
             you are logged in to weibo. your access token is:
             <div id="tokenDisplay"></div>
         </div>
         
         <script id="status-template" type="text/x-kendo-template">
+            <a href="itemview?postid=#=id#">
             #var original_pic#  
                     #if(original_pic !== undefined)
                     {#
-                        <img width="160" height="160" src="#= original_pic #" alt="#= user.screen_name #_tweetImage" 
+                        <img width="100%" height="100%" src="#= original_pic #" alt="#= user.screen_name #_tweetImage" 
                             style="position: absolute;z-index:-1;" />
                     #}#
 
@@ -29,6 +34,6 @@
                     ${text}
                 </div>
             </div>
-
+            </a>
         </script>
 </html>

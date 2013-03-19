@@ -82,6 +82,8 @@
     color: black;
     font-size: 0.7em;
     text-align: center;
+    font-weight:bold;
+    padding:0.5em;
 }
 
 .timeline-item P {
@@ -90,4 +92,5 @@
 
 .timeline-text {
     text-align:left;
+    font-weight:normal;
 }
