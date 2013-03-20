@@ -20,17 +20,22 @@
                 <p>An easy to use mobile app that lets you translate Chinese Weibo feeds into English with just one click.</p>
                 <p style="height:30px;"></p>
                 <p>Sign in with your Sina Weibo account</p>
-                <a id="wbLoginButton" data-role="button" data-click="callWBlogin" class="btn-signin">
+                <a id="wbLoginButton" data-role="button" data-click="callWBlogin" style="font-size:1.9em;">
                     <img src="styles/images/weibo_icon.png" />
                     SIGN IN
                 </a>
-            <p class="bottom-link">
-                If you don't have a Sina Weibo account <br/> please create one
-                <a href="http://www.surroundapp.asia/">here</a>
-            </p>
-            <div id='result'></div>
+                <p class="bottom-link">
+                    If you don't have a Sina Weibo account <br/> please create one
+                    <a href="http://www.surroundapp.asia/">here</a>
+                </p>
+                <div id='result'></div>
              
             </div>
+        </div>
+
+        <div data-role="view" id="constructionhome" data-layout="mobile-tabstrip">
+            This function is currently under development<br />
+            Please check back later.
         </div>
         
         <div data-role="layout" data-id="mobile-tabstrip">
@@ -45,10 +50,10 @@
             <div data-role="footer">
                 <div data-role="tabstrip">
                     <a href="home.html" data-icon="home">Home</a>
-                    <a href="#filter" data-icon="mostviewed">Filter</a>
-                    <a href="#messages" data-icon="contacts">Messages</a>
-                    <a href="#find" data-icon="search">Find</a>
-                    <a href="#settings" data-icon="settings">Settings</a>
+                    <a href="#constructionhome" data-icon="mostviewed">Filter</a>
+                    <a href="#constructionhome" data-icon="contacts">Messages</a>
+                    <a href="#constructionhome" data-icon="search">Find</a>
+                    <a href="#constructionhome" data-icon="settings">Settings</a>
                 </div>
             </div>
         </div>

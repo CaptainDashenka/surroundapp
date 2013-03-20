@@ -6,17 +6,57 @@
            <ul id="statusListView"></ul>
         </div>
            
-        <div data-role="view" id="itemview" data-layout="mobile-tabstrip" data-show="displayDetail">
-            
+        <div data-role="view" id="itemview" data-layout="details-layout" data-show="displayDetail" >
+           
+            <img id="iv-profilephoto" />
+            <div style="float:left; margin-top:2.5em;">
+                <span id="iv-userscreenname" style="font-size:1.3em;"></span>
+                <br />
+                <span id="iv-username" style="font-size:0.7em;"></span>
+            </div>
+            <div id="iv-text" class="posttextbox">
+               <div id="iv-postdate"></div>
+               <div id="iv-posttext"></div>
+            </div>
+ 
         </div>
     
         <div data-role="view" id="welcomescreen" data-init="showAccessToken">
             you are logged in to weibo. your access token is:
             <div id="tokenDisplay"></div>
         </div>
+    
+        <div data-role="view" id="construction" data-layout="details-layout">
+            This function is currently under development<br />
+            Please check back later.
+        </div>
         
+            <div data-role="layout" data-id="details-layout">
+            <header data-role="header">
+                <div style="background-color:black;text-align:center;">
+                    <a href="timelineview" data-role="button" style="background-color:black;padding:0px;float:left;">
+                        <img src="styles/images/navhome.png" /></a>
+                    <img src="styles/images/salogo_notext.png" style="height:30px;"/>
+                    <a href="construction" data-role="button" style="background-color:black;padding:0px;float:right;">
+                        <img src="styles/images/navnewpost.png" /></a>
+                </div>
+            </header>
+            
+            <div data-role="footer">
+                <ul id="buttongroupstrip" data-role="buttongroup">
+                    <li style="background-color: black" data-icon="bookmarks">Translate</li>
+                    <li style="background-color: black"  data-icon="reply">Reply</li>
+                    <li style="background-color: black" data-icon="refresh">Repeat</li>
+                    <li style="background-color: black" data-icon="toprated">Like</li>
+                    <li style="background-color: black" data-icon="more">More</li>
+                </ul>
+            </div>
+        </div>
+    
+
+    
         <script id="status-template" type="text/x-kendo-template">
-            <a href="itemview?postid=#=id#">
+            
             #var original_pic#  
                     #if(original_pic !== undefined)
                     {#
@@ -34,6 +74,6 @@
                     ${text}
                 </div>
             </div>
-            </a>
+            
         </script>
 </html>

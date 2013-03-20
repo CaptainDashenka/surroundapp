@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="home.html" />
+    <Content Include="kendo\styles\images\iconmasks.svg" />
     <Content Include="styles\images\logo250.png" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />
@@ -72,6 +73,8 @@
     <Content Include="kendo\styles\images\KendoUI.woff" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
     <Content Include="scripts\SA-main.js" />
+    <Content Include="styles\images\navhome.png" />
+    <Content Include="styles\images\navnewpost.png" />
     <Content Include="styles\images\salogo_notext.png" />
     <Content Include="styles\images\weibo_icon.png" />
     <Content Include="styles\main.css" />
