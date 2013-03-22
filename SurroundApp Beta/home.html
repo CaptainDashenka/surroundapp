@@ -31,8 +31,9 @@
             This function is currently under development<br />
             Please check back later.
         </div>
-        
-            <div data-role="layout" data-id="details-layout">
+    
+    
+    <div data-role="layout" data-id="details-layout">
             <header data-role="header">
                 <div style="background-color:black;text-align:center;">
                     <a href="timelineview" data-role="button" style="background-color:black;padding:0px;float:left;">
@@ -44,22 +45,27 @@
             </header>
             
             <div data-role="footer">
-                <ul id="buttongroupstrip" data-role="buttongroup">
-                    <li style="background-color: black" data-icon="bookmarks">Translate</li>
-                    <li style="background-color: black"  data-icon="reply">Reply</li>
-                    <li style="background-color: black" data-icon="refresh">Repeat</li>
-                    <li style="background-color: black" data-icon="toprated">Like</li>
-                    <li style="background-color: black" data-icon="more">More</li>
-                </ul>
+                <div data-role="tabstrip" id="tabStrip" data-select="onSelect">
+                    <a style="background-color: black" data-icon="bookmarks">Translate</a>
+                    <a style="background-color: black"  data-icon="reply">Reply</a>
+                    <a style="background-color: black"  data-icon="refresh">Repeat</a>
+                    <a style="background-color: black" data-icon="toprated">Like</a>
+                    <a style="background-color: black" data-icon="more">More</a>
+                </div>
             </div>
         </div>
     
-
+  <script>
+  function onSelect(e){
+        console.log(e);
+      //http://www.kendoui.com/forums/ui/tabstrip/how-to-acces-index-of-the-selected-tab.aspx
+    }
+    </script>
     
         <script id="status-template" type="text/x-kendo-template">
             
             #var original_pic#  
-            #if(original_pic !== undefined)
+            #if(original_pic !== undefined && original_pic !=='undefined' )
             {#
                 <img width="100%" height="100%" src="#= original_pic #" alt="#= user.screen_name #_tweetImage" 
                     style="position: absolute;z-index:-1;" />

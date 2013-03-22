@@ -100,7 +100,6 @@ function viewInit(e){
                 return response.data.statuses;
             }
         }
-              
     }),
     pullToRefresh: true,
     template: $("#status-template").html(),
@@ -156,11 +155,34 @@ function displayDetail(e) {
     $('#iv-username').html(diPost.user.name);
     $('#iv-posttext').html(diPost.text);
     $('#iv-postdate').html(kendo.toString(new Date(Date.parse(diPost.created_at)), "ddd dd MMM yyyy HH:mm "));
-    if (diPost.original_pic !== null)   {
+    if (diPost.original_pic !== null && diPost.original_pic !== undefined)   {
         $('#iv-postpicture').attr("src", diPost.original_pic + '.jpg');
         $('#iv-postpicture').css('display','block');
+        console.log(diPost.original_pic);
     }
-  /*  
+    
+  
+
+       /* 
+      $("#buttongroupstrip").kendoMobileButtonGroup({
+        select: function() {
+            console.log(this.selectedIndex);
+            switch(this.selectedIndex) {
+                case 0:
+                    console.log("translate")
+                    break;
+                default:
+                 app.navigate('#itemview');
+            }
+        }
+    });
+         var buttongroup = $("#buttongroupstrip").kendoMobileButtonGroup();
+     buttongroup.data("kendoMobileButtonGroup").current().bind("select", function(e) {
+         console.log(this.selectedIndex)
+       
+     })
+    
+    
      $("#buttongroupstrip").kendoMobileButtonGroup({
             select: function() {
                 //console.log(this.selectedIndex)
@@ -171,15 +193,8 @@ function displayDetail(e) {
             },
             index: 0
         });
-    
-            <script>
-            $("#buttongroupstrip").data("kendoMobileButtonGroup").bind("select", function(e) {
-             console.log(this.selectedIndex)
-               
-         })
-        </script>
-    
-    */
+      */
+
 }
 
 //============================ Utilities =========================//
